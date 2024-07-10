@@ -1,0 +1,50 @@
+version: '3'
+
+services:
+    api:
+        build:
+            context: .
+            dockerfile: ./Dockerfile
+        container_name: api
+        env_file:
+            - .local/docker-compose.env
+        volumes:
+            - ./src:/usr/local/api
+        ports:
+            - "8080:8080"
+        working_dir: /usr/local/api
+        depends_on:
+            - mysql
+        networks:
+            - local_network
+
+    mysql:
+        image: 'mysql:8.0'
+        container_name: mysql
+        ports:
+            - "3306:3306"
+        environment:
+            MYSQL_ROOT_PASSWORD: '${DB_ROOT_PASSWORD}'
+            MYSQL_ROOT_HOST: "%"
+            MYSQL_DATABASE: '${DB_DATABASE}'
+            MYSQL_USER: '${DB_USERNAME}'
+            MYSQL_PASSWORD: '${DB_PASSWORD}'
+            MYSQL_ALLOW_EMPTY_PASSWORD: 1
+            TZ: ${TZ}
+        volumes:
+            - ./.local/database/log:/var/log/mysql
+            - ./.local/database/data:/var/lib/mysql
+            - ./.local/database/conf.d:/etc/mysql/conf.d
+        networks:
+            - local_network
+        healthcheck:
+                test: ["CMD", "mysqladmin", "ping", "-p${DB_PASSWORD}"]
+                retries: 3
+                timeout: 5s
+        cap_add:
+                - SYS_NICE
+        command: mysqld --character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci --slow_query_log=0
+
+networks:
+    local_network:
+        driver: bridge

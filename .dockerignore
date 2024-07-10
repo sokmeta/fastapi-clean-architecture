@@ -1,0 +1,13 @@
+.vscode
+.git
+.gitignore
+.gitattributes
+**/.gitkeep
+**/Dockerfile
+docker-compose.yml
+docker-compose.override.yml
+**/.env
+**/.env.example
+**/.venv
+**/__pycache__
+**/tests
