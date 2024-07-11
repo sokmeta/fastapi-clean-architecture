@@ -1,6 +1,6 @@
 from sqlalchemy import Column, Integer, DateTime, String, Float, ForeignKey
 from sqlalchemy.orm import relationship
-
+from datetime import datetime
 from db.base import Base
 
 
@@ -13,6 +13,8 @@ class ItemModel(Base):
     description = Column("description", String(1000), nullable=False)
     price = Column("price", Float, nullable=False)
     tax = Column("tax", Float, nullable=False)
+    created_at = Column(DateTime, default=datetime.now())
+    updated_at = Column(DateTime, default=datetime.now(), onupdate=datetime.now())
     deleted_at = Column("deleted_at", DateTime(timezone=False), nullable=True)
 
     category_id = Column(Integer, ForeignKey('categories.id'))

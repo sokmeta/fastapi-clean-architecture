@@ -1,9 +1,13 @@
 alembic==1.13.2
+email-validator==2.1.0.post1
 fastapi==0.110.0
 httpx==0.26.0
 uvicorn==0.29.0
 sqlalchemy~=2.0.30
+passlib==1.7.4
 PyMySQL~=1.1.1
+python-jose==3.3.0
 pytest==8.2.2
 requests~=2.32.0
 cryptography~=42.0.5
+python-multipart==0.0.9
