@@ -1,7 +1,7 @@
 from starlette.middleware.base import BaseHTTPMiddleware
 from starlette.requests import Request
 from starlette.types import ASGIApp
-from core.config import SessionLocal
+from core.database import SessionLocal
 
 
 class SessionMiddleware(BaseHTTPMiddleware):

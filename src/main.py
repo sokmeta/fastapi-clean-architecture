@@ -1,9 +1,7 @@
 from fastapi import FastAPI
 from routers import item, category
-from db.base import Base
-from core.config import PREFIX, engine
+from core.config import PREFIX
 from middlewares import SessionMiddleware
-from contextlib import asynccontextmanager
 
 
 app = FastAPI()

@@ -1,5 +1,5 @@
 import pytest
-from core.config import engine, SessionLocal
+from core.database import SessionLocal
 from main import app
 from fastapi.testclient import TestClient
 

@@ -9,7 +9,7 @@ from alembic import context
 # access to the values within the .ini file in use.
 config = context.config
 
-from core.config import tcp_socket_database_url
+from core.database import tcp_socket_database_url
 
 DATABASE_URL = tcp_socket_database_url().render_as_string(False)
 config.set_main_option("sqlalchemy.url", DATABASE_URL)
