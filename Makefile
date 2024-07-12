@@ -6,6 +6,7 @@ DOCKER_ENV := --env-file .local/docker-compose.env
 setup:
 	${MAKE} build
 	${MAKE} up
+	${MAKE} migrate
 
 build:
 	${DOCKER_CMD} build

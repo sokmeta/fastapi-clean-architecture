@@ -14,7 +14,8 @@ services:
             - "8080:8080"
         working_dir: /usr/local/api
         depends_on:
-            - mysql
+            mysql:
+                condition: service_healthy
         networks:
             - local_network
 
