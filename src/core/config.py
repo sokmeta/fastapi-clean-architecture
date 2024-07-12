@@ -2,6 +2,6 @@ import os
 
 
 APP_VERSION = os.getenv('APP_VERSION')
-SCRET_KEY = os.getenv('SCRET_KEY')
+SCRET_KEY = os.getenv('SCRET_KEY', '1YRmJ0MI8nX5uCJZPqf2B6Md8F_yC9eW0w2CZgNAbU8')
 ALGORITHM = os.getenv('ALGORITHM')
 PREFIX = f"/{APP_VERSION}/api"

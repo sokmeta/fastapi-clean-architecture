@@ -3,8 +3,8 @@ from sqlalchemy.orm import Session
 from typing import Annotated
 from db.schemas import UserCreate
 from services import AuthService
-from dependency import get_db
-from fastapi.security import OAuth2PasswordRequestForm, OAuth2PasswordBearer
+from dependency import get_db, get_current_user
+from fastapi.security import OAuth2PasswordRequestForm
 
 router = APIRouter(prefix="/auth", tags=["Auth"])
 auth_service = AuthService
@@ -24,3 +24,9 @@ async def login(form_data: Annotated[OAuth2PasswordRequestForm, Depends()], db: 
     token = auth_service.create_token(user.username, user.id)
 
     return {"access_token": token, "token_type": "Bearer"}
+
+@router.get("/user")
+async def get_user(user: dict = Depends(get_current_user), db: Session = Depends(get_db)):
+    if not user:
+        raise HTTPException(401)
+    return user

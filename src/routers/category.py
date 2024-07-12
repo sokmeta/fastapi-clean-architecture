@@ -3,9 +3,9 @@ from sqlalchemy.orm import Session
 from typing import Annotated
 from db.schemas import CategoryBase
 from services import CategoryService
-from dependency import get_db
+from dependency import get_db, get_current_user
 
-router = APIRouter(prefix="/categories", tags=["Category"])
+router = APIRouter(prefix="/categories", tags=["Category"], dependencies=[Depends(get_current_user)])
 category_service = CategoryService
 
 @router.get("/", description="Get all Items", response_model=list[CategoryBase])
