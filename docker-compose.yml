@@ -46,6 +46,15 @@ services:
                 - SYS_NICE
         command: mysqld --character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci --slow_query_log=0
 
+    memcached:
+        image: memcached:1.6.15-alpine
+        networks:
+            - local_network
+        depends_on:
+            - api
+        ports:
+            - 21011:11211
+
 networks:
     local_network:
         driver: bridge
