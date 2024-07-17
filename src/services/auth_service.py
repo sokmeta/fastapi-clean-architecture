@@ -3,6 +3,7 @@ from db.schemas import UserCreate
 from db.models import UserModel
 from utils.password import pwd_context, verify_password
 from utils.token import generate_token
+from core.config import REFRESH_TOKEN_EXPIRES, ACCESS_TOKEN_EXPIRES
 
 class AuthService:
 
@@ -23,5 +24,8 @@ class AuthService:
 
         return user
     
-    def create_token(name, id):
-        return generate_token(name, id)
+    def generate_access_token(name, id):
+        return generate_token(name, id, ACCESS_TOKEN_EXPIRES)
+    
+    def generate_refresh_token(name, id):
+        return generate_token(name, id, REFRESH_TOKEN_EXPIRES)
